@@ -1,35 +1,32 @@
 package com.smswh.smswh_backend.domain.user;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Builder
-@Getter
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user")
 public class User {
-
-    @Id  // Primary key
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private String username;
+    @Column(nullable = false)
+    private String nickname;  // 아이디
+
+    @Column(nullable = false)
+    private String username;  // 유저 이름
 
     @Column(nullable = false)
     private String password;
 
-//    @Column(nullable = false)
-    private String email;
-
-    public User(String username, String password, String email){
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
+    private String roles;
 }
