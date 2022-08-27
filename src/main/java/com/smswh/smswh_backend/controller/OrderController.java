@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,5 +35,10 @@ public class OrderController {
     public ResponseEntity<?> mypage(@AuthenticationPrincipal PrincipalDetails principalDetails, Order order){
         Map map = orderService.mypage(principalDetails, order);
         return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    @GetMapping("/auth/order/orderList")  // 주문 내역 조회하기 api
+    public List<Order> orderList(@AuthenticationPrincipal PrincipalDetails principalDetails){
+        return orderService.orderList(principalDetails);
     }
 }
