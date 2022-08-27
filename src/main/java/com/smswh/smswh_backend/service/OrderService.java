@@ -8,8 +8,10 @@ import com.smswh.smswh_backend.repository.OrderRepository;
 import com.smswh.smswh_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
@@ -25,6 +27,14 @@ public class OrderService {
         orderEntity.setUser(user);
 
         return orderRepository.save(orderEntity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Order> orderList(PrincipalDetails principalDetails){
+        User user = userRepository.findById(principalDetails.getUser().getId());
+//        List<Order> orders = orderRepository.findByUserId(user.getId());
+
+        return orderRepository.findByUserId(user.getId());
     }
 
 }
