@@ -22,7 +22,7 @@ public class TokenUtils {  // token생성하는 코드 부분
 
     public String generateJwtToken(User usersEntity) {  // AccessToken생성
         return Jwts.builder()
-                .setSubject(usersEntity.getUserId())
+                .setSubject(usersEntity.getUsername())
                 .setHeader(createHeader())
                 .setClaims(createClaims(usersEntity))
                 .setExpiration(createExpireDate(1000 * 60 * 5))  // 유효시간 30분
@@ -32,7 +32,7 @@ public class TokenUtils {  // token생성하는 코드 부분
 
     public String saveRefreshToken(User usersEntity) {  // 리프레시 토큰 생성
         return Jwts.builder()
-                .setSubject(usersEntity.getUserId())
+                .setSubject(usersEntity.getUsername())
                 .setHeader(createHeader())
                 .setClaims(createClaims(usersEntity))
                 .setExpiration(createExpireDate(1000 * 60 * 10))
@@ -96,7 +96,7 @@ public class TokenUtils {  // token생성하는 코드 부분
 
     private Map<String, Object> createClaims(User usersEntity) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(DATA_KEY, usersEntity.getUserId());
+        claims.put(DATA_KEY, usersEntity.getUsername());
         return claims;
     }
 
