@@ -31,15 +31,18 @@ public class UserService {
     @Transactional
     public TokenResponse signUp(UserRequest userRequest) {  // 회원가입
 
+        System.out.println("-----1pw: " + userRequest.getPassword());
 //        String rawPassword = userRequest.getUserPassword();
 //        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         User usersEntity =
                 userRepository.save(
                         User.builder()
-                                .password(userRequest.getUserPassword())
+                                .password(userRequest.getPassword())
                                 .username(userRequest.getUsername())
                                 .email(userRequest.getEmail())
                                 .build());
+
+        System.out.println("-----2pw: " + userRequest.getPassword());
 
         // 회원가입시 토큰 생성해주기
         String accessToken = tokenUtils.generateJwtToken(usersEntity);
@@ -58,7 +61,7 @@ public class UserService {
     public TokenResponse signIn(UserRequest userRequest) {  // 로그인
         User usersEntity =
                 userRepository
-                        .findByUsernameAndPassword(userRequest.getUsername(), userRequest.getUserPassword())  // 유저 id랑 password로 가입된 사용자인지 찾아주기
+                        .findByUsernameAndPassword(userRequest.getUsername(), userRequest.getPassword())  // 유저 id랑 password로 가입된 사용자인지 찾아주기
                         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
         AuthEntity authEntity =
                 authRepository

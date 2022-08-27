@@ -20,6 +20,9 @@ public class UserController {
     @PostMapping("/user/signUp")
     public ResponseEntity signUp(@RequestBody UserRequest userRequest) {
 //        System.out.println("컨트롤러");
+        System.out.println("============================");
+        System.out.println("password : " + userRequest.getPassword());
+        //System.out.println("여기11?----------" + userRequest.getPassword());
         return userService.findByUsername(userRequest.getUsername()).isPresent()
                 ? ResponseEntity.badRequest().build()
                 : ResponseEntity.ok(userService.signUp(userRequest));
