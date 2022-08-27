@@ -1,6 +1,7 @@
 package com.smswh.smswh_backend.domain.user;
 
 
+import com.smswh.smswh_backend.domain.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

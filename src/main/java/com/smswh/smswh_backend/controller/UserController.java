@@ -1,6 +1,5 @@
 package com.smswh.smswh_backend.controller;
 
-
 import com.smswh.smswh_backend.config.auth.PrincipalDetails;
 import com.smswh.smswh_backend.domain.user.User;
 import com.smswh.smswh_backend.dto.PostUser;
