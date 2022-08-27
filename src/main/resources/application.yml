@@ -17,9 +17,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL:jdbc:mysql://b330cd596412c1:943e0cc0@us-cdbr-east-06.cleardb.net/heroku_dfc0efd6d776b77?reconnect=true}
-    username: ${DB_USER:b330cd596412c1}
-    password: ${DB_PASSWORD:943e0cc0}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect # Could not fetch the SequenceInformation from the database 에러 해결
