@@ -8,10 +8,12 @@ import com.smswh.smswh_backend.repository.OrderRepository;
 import com.smswh.smswh_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -35,6 +37,18 @@ public class OrderService {
 //        List<Order> orders = orderRepository.findByUserId(user.getId());
 
         return orderRepository.findByUserId(user.getId());
+    }
+
+    @Transactional
+    public Map mypage(PrincipalDetails principalDetails, Order order){
+        Map<String, String> map = new HashMap<>();
+        String username = principalDetails.getUser().getNickname();
+        long counts = orderRepository.countByUser(principalDetails.getUser());
+
+        map.put("user", username);
+        map.put("주문수", String.valueOf(counts));
+
+        return map;
     }
 
 }
