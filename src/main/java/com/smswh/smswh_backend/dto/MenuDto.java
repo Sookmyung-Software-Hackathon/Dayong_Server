@@ -16,12 +16,15 @@ public class MenuDto {
     private String menuName;
     private Double price;
     private int num;
+    private User user;
 
-    public Menu toEntity(String menuName, Double price, int num){
+    public Menu toEntity(){
         return Menu.builder()
                 .menuName(menuName)
                 .price(price)
-                .num(num).build();
+                .num(num)
+                .user(user)
+                .build();
     }
 
 }

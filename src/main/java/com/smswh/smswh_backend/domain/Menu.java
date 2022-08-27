@@ -28,6 +28,10 @@ public class Menu {
     @ManyToOne
     private Store store;
 
+    @JoinColumn(name="userId")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+
 
 
 }
