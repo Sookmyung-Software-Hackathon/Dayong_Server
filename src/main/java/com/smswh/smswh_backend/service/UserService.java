@@ -9,6 +9,7 @@ import com.smswh.smswh_backend.dto.TokenResponse;
 import com.smswh.smswh_backend.dto.UserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,21 +22,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final TokenUtils tokenUtils;
     private final AuthRepository authRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Optional<User> findByUserId(String userId){
-        return userRepository.findByUserId(userId);
+    public Optional<User> findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     @Transactional
     public TokenResponse signUp(UserRequest userRequest) {  // 회원가입
 
 //        String rawPassword = userRequest.getUserPassword();
-//
+//        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         User usersEntity =
                 userRepository.save(
                         User.builder()
                                 .password(userRequest.getUserPassword())
-                                .userId(userRequest.getUserId())
+                                .username(userRequest.getUsername())
                                 .email(userRequest.getEmail())
                                 .build());
 
@@ -56,7 +58,7 @@ public class UserService {
     public TokenResponse signIn(UserRequest userRequest) {  // 로그인
         User usersEntity =
                 userRepository
-                        .findByUserIdAndPassword(userRequest.getUserId(), userRequest.getUserPassword())  // 유저 id랑 password로 가입된 사용자인지 찾아주기
+                        .findByUsernameAndPassword(userRequest.getUsername(), userRequest.getUserPassword())  // 유저 id랑 password로 가입된 사용자인지 찾아주기
                         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
         AuthEntity authEntity =
                 authRepository
