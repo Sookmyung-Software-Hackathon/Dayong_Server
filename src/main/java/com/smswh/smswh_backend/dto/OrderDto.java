@@ -17,14 +17,16 @@ public class OrderDto {
     private int total;
     private User user;
     private Boolean delivery;
+    private String address;
 
 
-    public Order toEntity(Boolean dayong, int total, Boolean delivery){
+    public Order toEntity(Boolean dayong, int total, Boolean delivery, String address){
         return Order.builder()
                 .status("주문")
                 .dayong(dayong)
                 .total(total)
                 .delivery(delivery)
+                .address(address)
                 .build();
     }
 

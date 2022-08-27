@@ -28,6 +28,8 @@ public class Order {
 
     private Boolean delivery;
 
+    private String address;
+
     private int total;
 
     @CreationTimestamp
