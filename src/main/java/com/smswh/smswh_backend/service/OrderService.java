@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -25,6 +28,18 @@ public class OrderService {
         orderEntity.setUser(user);
 
         return orderRepository.save(orderEntity);
+    }
+
+    @Transactional
+    public Map mypage(PrincipalDetails principalDetails, Order order){
+        Map<String, String> map = new HashMap<>();
+        String username = principalDetails.getUser().getNickname();
+        long counts = orderRepository.countByUser(principalDetails.getUser());
+
+        map.put("user", username);
+        map.put("주문수", String.valueOf(counts));
+
+        return map;
     }
 
 }
