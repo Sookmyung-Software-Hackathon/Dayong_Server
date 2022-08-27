@@ -25,7 +25,7 @@ public class OrderService {
     @Transactional
     public Order order(PrincipalDetails principalDetails, OrderDto orderDto){
         User user = userRepository.findById(principalDetails.getUser().getId());
-        Order orderEntity = orderDto.toEntity(orderDto.getDayong(), orderDto.getTotal(), orderDto.getDelivery());
+        Order orderEntity = orderDto.toEntity(orderDto.getDayong(), orderDto.getTotal(), orderDto.getDelivery(), orderDto.getAddress());
         orderEntity.setUser(user);
 
         return orderRepository.save(orderEntity);
