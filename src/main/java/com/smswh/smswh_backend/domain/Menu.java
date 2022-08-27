@@ -21,7 +21,7 @@ public class Menu {
     private Long menuId;
 
     private String menuName;
-    private Double price;
+    private int price;
     private int num;
 
     @JoinColumn(name="storeId")

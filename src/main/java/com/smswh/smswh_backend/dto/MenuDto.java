@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class MenuDto {
 
     private String menuName;
-    private Double price;
+    private int price;
     private int num;
     private User user;
 
