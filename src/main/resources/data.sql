@@ -1,0 +1,1 @@
+INSERT INTO Store (address, contact) values ("서울특별시 용산구", "02-1234-5678")
