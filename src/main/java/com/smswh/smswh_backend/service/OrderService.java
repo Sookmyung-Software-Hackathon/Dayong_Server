@@ -44,8 +44,10 @@ public class OrderService {
         Map<String, String> map = new HashMap<>();
         String username = principalDetails.getUser().getNickname();
         long counts = orderRepository.countByUser(principalDetails.getUser());
+        int point = principalDetails.getUser().getPoint();
 
         map.put("user", username);
+        map.put("point", String.valueOf(point));
         map.put("주문수", String.valueOf(counts));
 
         return map;
