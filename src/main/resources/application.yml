@@ -17,9 +17,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/smswh?serverTimezone=Asia/Seoul}
+    username: ${DB_USER:smswh}
+    password: ${DB_PASSWORD:1234}
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect # Could not fetch the SequenceInformation from the database 에러 해결
@@ -28,10 +28,6 @@ spring:
       ddl-auto: update # update: 데이터 INSERT 후 서버 재실행해도 남아있음 / create: 서버 재실행시 INSERT된 데이터 사라짐 / none: 배포 후 사용
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-#    properties:
-#        hibernate:
-#          show-sql: true
-#          format-sql: true
     database: sql_server
     defer-datasource-initialization: true
 
@@ -43,18 +39,6 @@ spring:
     multipart:
       enabled: true
       max-file-size: 2MB
-
-  security:
-    user:
-      name: root
-      password:
-
-#jwt:
-#  header: Authorization
-#  secret: b8add927799d857ff15157af2cdb7977d4a8a9968379cba73c3bdeb85228a73cda7fcc3468b750a21a5707fe77d0f8936e29d9d133e1121dc9f6bd91c02edd83 # openssl rand -hex 64
-#  token-validity-in-seconds: 86400  # 24 hours
-#
-
 
 
 
