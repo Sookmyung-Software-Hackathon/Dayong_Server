@@ -3,7 +3,7 @@ server:
   servlet:
     context-path: /
     encoding:
-      charset: utf-8
+      charset: UTF-8
       enabled: true
 
 spring:
